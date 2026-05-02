@@ -4,7 +4,7 @@ public class Usuario {
 private int idUsuario;
 private String nombreUsuario;
 private String clave;
-private String rol; // Administrador o Secretario[cite: 1]
+private String rol; // Administrador o Secretario
 
 public Usuario() {}
 

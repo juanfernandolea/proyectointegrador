@@ -7,18 +7,18 @@ public class VistaPartida {
 private Scanner entrada = new Scanner(System.in);
 
 public Partida formularioNuevaPartida() {
-System.out.println("\n--- REGISTRO DE NUEVA PARTIDA SACRAMENTAL ---");[cite: 1]
+System.out.println("\n--- REGISTRO DE NUEVA PARTIDA SACRAMENTAL ---");
 
-System.out.print("Tipo de sacramento (Bautismo, Matrimonio, etc.): ");[cite: 1]
+System.out.print("Tipo de sacramento (Bautismo, Matrimonio, etc.): ");
 String tipo = entrada.nextLine();
 
-System.out.print("Nombre completo del feligrés: ");[cite: 1]
+System.out.print("Nombre completo del feligrés: ");
 String nombre = entrada.nextLine();
 
-System.out.print("Fecha del evento (DD/MM/AAAA): ");[cite: 1]
+System.out.print("Fecha del evento (DD/MM/AAAA): ");
 String fecha = entrada.nextLine();
 
-System.out.print("Sacerdote que celebró: ");[cite: 1]
+System.out.print("Sacerdote que celebró: ");
 String sacerdote = entrada.nextLine();
 
 return new Partida(tipo, nombre, fecha, sacerdote);

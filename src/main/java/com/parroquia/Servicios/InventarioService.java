@@ -9,10 +9,10 @@ private InventarioDao dao = new InventarioDao();
 public String registrarArticulo(Inventario i) {
 // Regla: No permitir cantidades negativas
 if (i.getCantidad() < 0) {
-return "Error: No puedes ingresar cantidades negativas.";[cite: 1]
+return "Error: No puedes ingresar cantidades negativas.";
 }
 
 dao.agregarArticulo(i);
-return "Artículo registrado en el inventario.";[cite: 1]
+return "Artículo registrado en el inventario.";
 }
 }

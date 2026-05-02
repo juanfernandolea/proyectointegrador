@@ -1,56 +1,50 @@
 package com.parroquia.Controlador;
 
-import com.parroquia.Modelo.Partida;
-import com.parroquia.Modelo.Inventario;
-import com.parroquia.Servicios.PartidaService;
-import com.parroquia.Servicios.InventarioService;
-import com.parroquia.Vista.VistaPartida;
-import com.parroquia.Vista.VistaInventario;
-import com.parroquia.Vista.VistaGeneral;
+import com.parroquia.Dao.*;
+import com.parroquia.Modelo.*;
+import java.util.Scanner;
 
 public class GestionParroquia {
-private VistaGeneral vistaMenu = new VistaGeneral();
-private VistaPartida vistaPartida = new VistaPartida();
-private VistaInventario vistaInventario = new VistaInventario();
+    private PartidaDao partidaDao = new PartidaDao();
+    private Scanner leer = new Scanner(System.in);
 
-private PartidaService servicioPartida = new PartidaService();
-private InventarioService servicioInventario = new InventarioService();
+    public void menuPrincipal() {
+        int opcion;
+        do {
+            System.out.println("\n--- SISTEMA PARROQUIAL ---");
+            System.out.println("1. Registrar Partida");
+            System.out.println("2. Ver todas las Partidas");
+            System.out.println("3. Salir");
+            System.out.print("Seleccione: ");
+            opcion = leer.nextInt();
+            leer.nextLine(); // Limpiar buffer
 
-public void iniciar() {
-int opcion = 0;
-do {
-opcion = vistaMenu.menuPrincipal();
+            switch (opcion) {
+                case 1: registrarPartida(); break;
+                case 2: mostrarPartidas(); break;
+            }
+        } while (opcion != 3);
+    }
 
-switch (opcion) {
-case 1:
-// Lógica para Partidas Sacramentales
-Partida nueva = vistaPartida.formularioNuevaPartida();
-String resultadoP = servicioPartida.guardarNuevaPartida(nueva);
-vistaPartida.mostrarMensaje(resultadoP);
-break;
+    private void registrarPartida() {
+        Partida p = new Partida();
+        System.out.print("Tipo (Bautismo/Matrimonio): ");
+        p.setTipoSacramento(leer.nextLine());
+        System.out.print("Nombre del feligrés: ");
+        p.setNombreFeligres(leer.nextLine());
+        System.out.print("Fecha (AAAA-MM-DD): ");
+        p.setFecha(leer.nextLine());
+        System.out.print("Sacerdote: ");
+        p.setSacerdote(leer.nextLine());
+        
+        if(partidaDao.registrar(p)) {
+            System.out.println("¡Éxito!");
+        }
+    }
 
-case 2:
-System.out.println("Módulo de Bóvedas en construcción...");[cite: 1]
-break;
-
-case 3:
-// Lógica para Inventario
-Inventario item = vistaInventario.formularioArticulo();
-String resultadoI = servicioInventario.registrarArticulo(item);
-System.out.println(resultadoI);
-break;
-
-case 4:
-System.out.println("Módulo de Misas en construcción...");[cite: 1]
-break;
-
-case 5:
-System.out.println("Cerrando el sistema del despacho. ¡Hasta luego!");[cite: 1]
-break;
-
-default:
-System.out.println("Opción no válida.");
-}
-} while (opcion != 5);
-}
+    private void mostrarPartidas() {
+        for (Partida p : partidaDao.listarTodo()) {
+            System.out.println(p.getId() + " | " + p.getNombreFeligres() + " | " + p.getTipoSacramento());
+        }
+    }
 }
