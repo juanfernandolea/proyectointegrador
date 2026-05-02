@@ -12,7 +12,7 @@ private Connection miConexion = null;
 // Asegúrate de que la base de datos se llame 'parroquia_db' o cámbialo aquí
 private String url = "jdbc:postgresql://localhost:5432/parroquia_db";
 private String usuario = "postgres"; 
-private String clave = "tu_password_aqui";
+private String clave = "1234";
 
 public Connection obtenerConexion() {
 try {
