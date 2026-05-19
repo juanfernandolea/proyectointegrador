@@ -3,18 +3,15 @@ package com.parroquia.Vista;
 import com.parroquia.Modelo.Partida;
 import com.parroquia.Servicios.PartidaService;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.SwingConstants;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class VistaGeneral extends JFrame {
 
 public VistaGeneral() {
+
 setTitle("Parroquia La Inmaculada Concepción de Villagorgona");
 setSize(900, 600);
 setLocationRelativeTo(null);
@@ -34,7 +31,7 @@ barraMenu.add(menuMisas);
 
 setJMenuBar(barraMenu);
 
-// Evento del menú Partidas
+// PARTIDAS
 menuPartidas.addMouseListener(new MouseAdapter() {
 @Override
 public void mouseClicked(MouseEvent e) {
@@ -45,6 +42,15 @@ PartidaService service = new PartidaService();
 String mensaje = service.guardarNuevaPartida(partida);
 
 vistaPartida.mostrarMensaje(mensaje);
+}
+});
+
+// BÓVEDAS
+menuBovedas.addMouseListener(new MouseAdapter() {
+@Override
+public void mouseClicked(MouseEvent e) {
+VistaBoveda vista = new VistaBoveda();
+vista.setVisible(true);
 }
 });
 
