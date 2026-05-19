@@ -10,7 +10,7 @@ public Connection obtenerConexion() {
 try {
 String url = "jdbc:postgresql://localhost:5432/parroquia_db";
 String usuario = "postgres";
-String password = "iglesiavg";
+String password = "1234";
 
 return DriverManager.getConnection(url, usuario, password);
 
