@@ -1,22 +1,59 @@
 package com.parroquia.Vista;
 
-import java.util.Scanner;
+import com.parroquia.Modelo.Partida;
+import com.parroquia.Servicios.PartidaService;
 
-public class VistaGeneral {
-private Scanner entrada = new Scanner(System.in);
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public int menuPrincipal() {
-System.out.println("\n****************************************");
-System.out.println("*      SISTEMA DE GESTIÓN PARROQUIAL    *");
-System.out.println("*  Parroquia La Inmaculada Concepción   *");
-System.out.println("****************************************");
-System.out.println("1. Gestión de Partidas Sacramentales");
-System.out.println("2. Control de Bóvedas (Cementerio)");
-System.out.println("3. Inventario de la Parroquia");
-System.out.println("4. Agenda de Misas");
-System.out.println("5. Salir");
-System.out.print("\nPor favor, elija una opción: ");
+public class VistaGeneral extends JFrame {
 
-return Integer.parseInt(entrada.nextLine());
+public VistaGeneral() {
+setTitle("Parroquia La Inmaculada Concepción de Villagorgona");
+setSize(900, 600);
+setLocationRelativeTo(null);
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+JMenuBar barraMenu = new JMenuBar();
+
+JMenu menuPartidas = new JMenu("Partidas");
+JMenu menuBovedas = new JMenu("Bóvedas");
+JMenu menuInventario = new JMenu("Inventario");
+JMenu menuMisas = new JMenu("Misas");
+
+barraMenu.add(menuPartidas);
+barraMenu.add(menuBovedas);
+barraMenu.add(menuInventario);
+barraMenu.add(menuMisas);
+
+setJMenuBar(barraMenu);
+
+// Evento del menú Partidas
+menuPartidas.addMouseListener(new MouseAdapter() {
+@Override
+public void mouseClicked(MouseEvent e) {
+VistaPartida vistaPartida = new VistaPartida();
+Partida partida = vistaPartida.formularioNuevaPartida();
+
+PartidaService service = new PartidaService();
+String mensaje = service.guardarNuevaPartida(partida);
+
+vistaPartida.mostrarMensaje(mensaje);
+}
+});
+
+JLabel titulo = new JLabel("Sistema de Gestión Parroquial");
+titulo.setHorizontalAlignment(SwingConstants.CENTER);
+titulo.setFont(new Font("Arial", Font.BOLD, 28));
+
+add(titulo);
+
+setVisible(true);
 }
 }

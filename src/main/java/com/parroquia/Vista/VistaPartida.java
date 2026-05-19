@@ -1,30 +1,55 @@
 package com.parroquia.Vista;
 
 import com.parroquia.Modelo.Partida;
-import java.util.Scanner;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.GridLayout;
 
 public class VistaPartida {
-private Scanner entrada = new Scanner(System.in);
 
 public Partida formularioNuevaPartida() {
-System.out.println("\n--- REGISTRO DE NUEVA PARTIDA SACRAMENTAL ---");
+JTextField txtTipo = new JTextField();
+JTextField txtNombre = new JTextField();
+JTextField txtFecha = new JTextField();
+JTextField txtSacerdote = new JTextField();
 
-System.out.print("Tipo de sacramento (Bautismo, Matrimonio, etc.): ");
-String tipo = entrada.nextLine();
+JPanel panel = new JPanel(new GridLayout(4, 2, 5, 5));
+panel.add(new JLabel("Tipo de sacramento:"));
+panel.add(txtTipo);
 
-System.out.print("Nombre completo del feligrés: ");
-String nombre = entrada.nextLine();
+panel.add(new JLabel("Nombre del feligrés:"));
+panel.add(txtNombre);
 
-System.out.print("Fecha del evento (DD/MM/AAAA): ");
-String fecha = entrada.nextLine();
+panel.add(new JLabel("Fecha (DD/MM/AAAA):"));
+panel.add(txtFecha);
 
-System.out.print("Sacerdote que celebró: ");
-String sacerdote = entrada.nextLine();
+panel.add(new JLabel("Sacerdote:"));
+panel.add(txtSacerdote);
 
-return new Partida(tipo, nombre, fecha, sacerdote);
+int opcion = JOptionPane.showConfirmDialog(
+null,
+panel,
+"Registrar Partida Sacramental",
+JOptionPane.OK_CANCEL_OPTION,
+JOptionPane.PLAIN_MESSAGE
+);
+
+if (opcion == JOptionPane.OK_OPTION) {
+return new Partida(
+txtTipo.getText(),
+txtNombre.getText(),
+txtFecha.getText(),
+txtSacerdote.getText()
+);
+}
+
+return null;
 }
 
 public void mostrarMensaje(String mensaje) {
-System.out.println(">>> " + mensaje);
+JOptionPane.showMessageDialog(null, mensaje);
 }
 }

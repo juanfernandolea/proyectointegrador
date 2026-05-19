@@ -1,11 +1,13 @@
 package com.parroquia;
 
-import com.parroquia.Controlador.GestionParroquia;
+import javax.swing.SwingUtilities;
+import com.parroquia.Vista.VistaGeneral;
 
 public class Main {
 public static void main(String[] args) {
-// Aquí se crea el controlador y se inicia el menú
-GestionParroquia gestion = new GestionParroquia();
-gestion.menuPrincipal();
+SwingUtilities.invokeLater(() -> {
+VistaGeneral vista = new VistaGeneral();
+vista.setVisible(true);
+});
 }
 }

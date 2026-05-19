@@ -5,23 +5,26 @@ import com.parroquia.Modelo.Partida;
 import java.util.List;
 
 public class PartidaService {
+
 private PartidaDao dao = new PartidaDao();
 
 public String guardarNuevaPartida(Partida p) {
-// Regla: No dejar guardar si el nombre está vacío
-if (p.getNombreFeligres().isEmpty()) {
-return "Ojo: El nombre del feligrés no puede estar vacío.";
+if (p == null) {
+return "Operación cancelada.";
 }
 
-// Regla: El tipo de sacramento debe ser válido
-if (p.getTipoSacramento().equals("Seleccionar")) {
-return "Debes elegir un tipo de sacramento válido.";
+if (p.getNombreFeligres() == null || p.getNombreFeligres().trim().isEmpty()) {
+return "El nombre del feligrés no puede estar vacío.";
+}
+
+if (p.getTipoSacramento() == null || p.getTipoSacramento().trim().isEmpty()) {
+return "Debe ingresar el tipo de sacramento.";
 }
 
 if (dao.registrar(p)) {
-return "¡Excelente! La partida se guardó correctamente.";
+return "Partida registrada correctamente.";
 } else {
-return "Hubo un error al intentar guardar en la base de datos.";
+return "Error al guardar la partida.";
 }
 }
 
